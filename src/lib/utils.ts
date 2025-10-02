@@ -13,7 +13,8 @@ export const generateCards = () => {
 
   for (let i = 1; i <= MAX_MATCHING_VALUES; i++) {
     for (let j = 0; j <= 1; j++) {
-      cards.push({ id: j * MAX_MATCHING_VALUES + i, value: i, status: 'hidden' })
+      const id = j * MAX_MATCHING_VALUES + i
+      cards.push({ id: `card${id}`, value: i, status: 'hidden' })
     }
   }
 

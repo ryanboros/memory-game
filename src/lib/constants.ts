@@ -1,22 +1,3 @@
-// import CircleSvg from '@/assets/circle.svg'
-// import ClubSvg from '@/assets/club.svg'
-// import DiamondSvg from '@/assets/diamond.svg'
-// import FireSvg from '@/assets/fire.svg'
-// import HeartSvg from '@/assets/heart.svg'
-// import LeafSvg from '@/assets/leaf.svg'
-// import MoonSvg from '@/assets/moon.svg'
-// import PlanetSvg from '@/assets/planet.svg'
-// import PlusSvg from '@/assets/plus.svg'
-// import SmileSvg from '@/assets/smile.svg'
-// import SpadeSvg from '@/assets/spade.svg'
-// import SquareSvg from '@/assets/square.svg'
-// import StarSvg from '@/assets/star.svg'
-// import SunSvg from '@/assets/sun.svg'
-// import TriangleSvg from '@/assets/triangle.svg'
-// import WaterSvg from '@/assets/water.svg'
-// import WavesSvg from '@/assets/waves.svg'
-// import WindSvg from '@/assets/wind.svg'
-
 export const MAX_MATCHING_VALUES = 18
 
 export const CardIcon = (id) => {
