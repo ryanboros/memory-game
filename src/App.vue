@@ -11,7 +11,7 @@ onMounted(() => store.startGame())
 
 const { cards, matches, moves } = storeToRefs(store)
 
-const showFinished = computed(() => matches.value === MAX_MATCHING_VALUES)
+const isFinished = computed(() => matches.value === MAX_MATCHING_VALUES)
 
 const handleCardClick = (id) => {
   if (!store.selection) {
@@ -42,7 +42,7 @@ const handleNewGameClick = () => {
           @clickHandler="handleCardClick"
         />
       </div>
-      <div class="absolute inset-0 flex items-center justify-center" v-if="showFinished">
+      <div class="absolute inset-0 flex items-center justify-center" v-if="isFinished">
         <button
           class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           @click="handleNewGameClick"

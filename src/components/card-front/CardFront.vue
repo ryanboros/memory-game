@@ -51,7 +51,16 @@ const props = defineProps(['cardStatus', 'cardValue'])
 const { cardStatus, cardValue } = toRefs(props)
 
 const activeIcon = computed(() => resolveComponent(CardIcon(cardValue.value)))
-const bgColor = computed(() => (cardStatus.value === 'match' ? 'bg-sky-200' : 'bg-white'))
+const bgColor = computed(() => {
+  if (cardStatus.value === 'match') return 'bg-sky-200'
+  if (cardStatus.value === 'right') return 'bg-green-200'
+  if (cardStatus.value === 'wrong') return 'bg-red-200'
+
+  return 'bg-white'
+})
+const isShowing = computed(() => cardStatus.value === 'show')
+const isWrong = computed(() => cardStatus.value === 'wrong')
+const isRight = computed(() => cardStatus.value === 'right')
 const matchIconClass = computed(() =>
   cardStatus.value === 'match' ? 'MatchSvg' : CardIcon(cardValue.value),
 )
@@ -60,7 +69,7 @@ const matchIconClass = computed(() =>
 <template>
   <div
     class="w-full h-26 border-1 border-stone-400 rounded-lg flex items-center justify-center"
-    :class="bgColor"
+    :class="[{ flipCard: isShowing, shakeCard: isWrong, jellowCard: isRight }, bgColor]"
   >
     <component class="svg-image" :class="matchIconClass" :is="activeIcon" />
   </div>
@@ -68,7 +77,6 @@ const matchIconClass = computed(() =>
 
 <style lang="css" scoped>
 .svg-image {
-  filter: invert(53%) sepia(41%) saturate(4038%) hue-rotate(160deg) brightness(92%) contrast(101%);
   height: 60px;
   width: 60px;
 }
@@ -83,10 +91,14 @@ const matchIconClass = computed(() =>
 
 .ClubSvg {
   filter: invert(32%) sepia(11%) saturate(902%) hue-rotate(176deg) brightness(91%) contrast(84%);
+  height: 50px;
+  width: 50px;
 }
 
 .DiamondSvg {
   filter: invert(16%) sepia(52%) saturate(7492%) hue-rotate(350deg) brightness(73%) contrast(114%);
+  height: 50px;
+  width: 50px;
 }
 
 .FireSvg {
@@ -95,6 +107,8 @@ const matchIconClass = computed(() =>
 
 .HeartSvg {
   filter: invert(66%) sepia(40%) saturate(6490%) hue-rotate(319deg) brightness(103%) contrast(101%);
+  height: 50px;
+  width: 50px;
 }
 
 .LeafSvg {
@@ -114,11 +128,15 @@ const matchIconClass = computed(() =>
 }
 
 .SmileSvg {
-  filter: invert(86%) sepia(34%) saturate(5994%) hue-rotate(360deg) brightness(102%) contrast(105%);
+  filter: invert(99%) sepia(45%) saturate(4281%) hue-rotate(333deg) brightness(101%) contrast(103%);
+  height: 50px;
+  width: 50px;
 }
 
 .SpadeSvg {
   filter: invert(0%) sepia(0%) saturate(7500%) hue-rotate(327deg) brightness(96%) contrast(104%);
+  height: 50px;
+  width: 50px;
 }
 
 .StarSvg {
@@ -126,11 +144,11 @@ const matchIconClass = computed(() =>
 }
 
 .SunSvg {
-  filter: invert(92%) sepia(18%) saturate(1081%) hue-rotate(343deg) brightness(102%) contrast(107%);
+  filter: invert(86%) sepia(34%) saturate(5994%) hue-rotate(360deg) brightness(102%) contrast(105%);
 }
 
 .SquareSvg {
-  filter: invert(95%) sepia(98%) saturate(715%) hue-rotate(21deg) brightness(99%) contrast(93%);
+  filter: invert(77%) sepia(60%) saturate(4111%) hue-rotate(41deg) brightness(102%) contrast(101%);
 }
 
 .TriangleSvg {
@@ -147,5 +165,76 @@ const matchIconClass = computed(() =>
 
 .WindSvg {
   filter: invert(69%) sepia(11%) saturate(164%) hue-rotate(345deg) brightness(93%) contrast(83%);
+}
+
+@keyframes flip-in-ver-right {
+  0% {
+    transform: rotateY(-80deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateY(0);
+    opacity: 1;
+  }
+}
+
+.flipCard {
+  animation: flip-in-ver-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s 1 normal both;
+}
+
+@keyframes shake-horizontal-normal {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60% {
+    transform: translateX(10px);
+  }
+  80% {
+    transform: translateX(8px);
+  }
+  90% {
+    transform: translateX(-8px);
+  }
+}
+
+.shakeCard {
+  animation: shake-horizontal-normal 0.7s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s 1 normal both;
+}
+
+@keyframes jello-horizontal-normal {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.jellowCard {
+  animation: jello-horizontal-normal 0.7s ease 0s 1 normal both;
 }
 </style>
