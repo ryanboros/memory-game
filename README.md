@@ -1,18 +1,22 @@
 # memory-game
 
-This template should help get you started developing with Vue 3 in Vite.
+Frontendeval coding exercise https://frontendeval.com/questions/memory-game
 
-## Recommended IDE Setup
+## Prompt
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Create a card matching game to test the player's memory.
 
-## Type Support for `.vue` Imports in TS
+## Requirements
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
+- Cards should be laid out on a 6x6 grid, all face down initially (i.e. numbers not showing)
+- There should be a total of 36 cards with the numbers 1-18 (two of each), placed randomly on the grid
+- Clicking a card should 'reveal' it - showing the hidden number of the card
+- Clicking a second card should reveal that card
+- If the second card has the same number as the first card, both cards should be removed from the board after 3 seconds
+- If the second card has a different number to the first card, both cards should be 'hidden' again after 3 seconds (i.e. turned face down)
+- The user shouldn't be able to turn over any more cards until the 3 second timer completes and the two revealed cards are either removed (if they matched), or hidden again (if they didn't)
+- Once all cards are removed from the board, the game is over and the 'Play again' button should be shown
+- Clicking 'Play again' should generate a new, random set of cards on the grid
 
 ## Project Setup
 
